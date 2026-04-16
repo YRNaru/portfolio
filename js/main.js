@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initFloatingBackToTop();
   initShowcaseSlider();
+  initBubbles();
 });
 
 /* ========================================
@@ -703,4 +704,59 @@ function initShowcaseSlider() {
     }
 
   });
+}
+
+/* ========================================
+   AMBIENT BUBBLES
+   ======================================== */
+function initBubbles() {
+  const container = document.getElementById('bubblesContainer');
+  if (!container) return;
+
+  // Respect reduced motion preference
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const bubbleColors = [
+    'rgba(205, 255, 80, 0.12)',   // Lime accent
+    'rgba(120, 200, 255, 0.10)',  // Cyan
+    'rgba(200, 130, 255, 0.10)',  // Purple
+    'rgba(255, 180, 100, 0.08)',  // Warm orange
+    'rgba(100, 255, 200, 0.10)',  // Mint
+  ];
+
+  const createBubble = () => {
+    const bubble = document.createElement('div');
+    bubble.className = 'bubble';
+
+    const size = Math.random() * 160 + 60; // 60px ~ 220px
+    const left = Math.random() * 100;       // 0% ~ 100%
+    const duration = Math.random() * 12 + 14; // 14s ~ 26s
+    const drift = (Math.random() - 0.5) * 120; // -60px ~ 60px horizontal sway
+    const opacity = Math.random() * 0.1 + 0.06; // 0.06 ~ 0.16
+    const color = bubbleColors[Math.floor(Math.random() * bubbleColors.length)];
+
+    bubble.style.cssText = `
+      width: ${size}px;
+      height: ${size}px;
+      left: ${left}%;
+      animation-duration: ${duration}s;
+      --bubble-drift: ${drift}px;
+      --bubble-opacity: ${opacity};
+      background: radial-gradient(circle at 30% 30%, ${color}, transparent 60%);
+      border-color: ${color.replace(/[\d.]+\)$/, '0.08)')};
+    `;
+
+    container.appendChild(bubble);
+
+    // Self-remove after animation completes
+    setTimeout(() => bubble.remove(), duration * 1000);
+  };
+
+  // Initial batch of bubbles (staggered)
+  for (let i = 0; i < 6; i++) {
+    setTimeout(createBubble, i * 2000);
+  }
+
+  // Continuously spawn new bubbles
+  setInterval(createBubble, 3000);
 }
