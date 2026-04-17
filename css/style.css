@@ -508,9 +508,9 @@ body::before {
   width: 60vw;
   height: 60vw;
   background: radial-gradient(circle, var(--color-accent-dim) 0%, transparent 70%);
-  filter: blur(100px);
+  filter: blur(60px);
   pointer-events: none;
-  will-change: transform;
+  contain: layout style;
 }
 
 .hero-bg-glow-2 {
@@ -520,9 +520,9 @@ body::before {
   width: 40vw;
   height: 40vw;
   background: radial-gradient(circle, rgba(205, 255, 80, 0.08) 0%, transparent 70%);
-  filter: blur(80px);
+  filter: blur(50px);
   pointer-events: none;
-  will-change: transform;
+  contain: layout style;
 }
 
 .hero-ambient-text {
@@ -538,7 +538,6 @@ body::before {
   transform: translate(-50%, -50%);
   pointer-events: none;
   white-space: nowrap;
-  will-change: transform;
 }
 
 .hero-content {

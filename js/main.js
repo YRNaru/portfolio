@@ -207,27 +207,36 @@ function initMouseParallax() {
   if (window.matchMedia('(pointer: coarse)').matches) return;
   if (window.innerWidth < 768) return;
 
+  const hero = document.getElementById('hero');
   const glow1 = document.getElementById('heroGlow1');
   const glow2 = document.getElementById('heroGlow2');
-  let targetX = 0, targetY = 0;
-  let currentX = 0, currentY = 0;
+  if (!hero) return;
+
+  let isVisible = true;
+
+  // Only animate when hero is visible
+  const observer = new IntersectionObserver(
+    ([entry]) => { isVisible = entry.isIntersecting; },
+    { threshold: 0 }
+  );
+  observer.observe(hero);
+
+  // Use GSAP quickTo for batched, GPU-efficient transform updates
+  const g1x = glow1 ? gsap.quickTo(glow1, 'x', { duration: 0.6, ease: 'power2.out' }) : null;
+  const g1y = glow1 ? gsap.quickTo(glow1, 'y', { duration: 0.6, ease: 'power2.out' }) : null;
+  const g2x = glow2 ? gsap.quickTo(glow2, 'x', { duration: 0.8, ease: 'power2.out' }) : null;
+  const g2y = glow2 ? gsap.quickTo(glow2, 'y', { duration: 0.8, ease: 'power2.out' }) : null;
 
   document.addEventListener('mousemove', (e) => {
-    targetX = (e.clientX / window.innerWidth - 0.5) * 30;
-    targetY = (e.clientY / window.innerHeight - 0.5) * 30;
+    if (!isVisible) return;
+    const mx = (e.clientX / window.innerWidth - 0.5) * 30;
+    const my = (e.clientY / window.innerHeight - 0.5) * 30;
+
+    if (g1x) g1x(mx);
+    if (g1y) g1y(my);
+    if (g2x) g2x(-mx * 0.6);
+    if (g2y) g2y(-my * 0.6);
   }, { passive: true });
-
-  function animate() {
-    currentX += (targetX - currentX) * 0.05;
-    currentY += (targetY - currentY) * 0.05;
-
-    if (glow1) glow1.style.transform = `translate(${currentX}px, ${currentY}px)`;
-    if (glow2) glow2.style.transform = `translate(${-currentX * 0.6}px, ${-currentY * 0.6}px)`;
-
-    requestAnimationFrame(animate);
-  }
-
-  animate();
 }
 
 /* ========================================
