@@ -248,30 +248,26 @@ function initCursor() {
   const cursor = document.getElementById('cursor');
   const cursorDot = document.getElementById('cursorDot');
   const cursorLabel = document.getElementById('cursorLabel');
-  let mouseX = 0, mouseY = 0;
-  let cursorX = 0, cursorY = 0;
-  let dotX = 0, dotY = 0;
+  if (!cursor || !cursorDot) return;
+
+  // Initialize GSAP centering to avoid CSS transform overriding issues
+  gsap.set(cursor, { xPercent: -50, yPercent: -50 });
+  gsap.set(cursorDot, { xPercent: -50, yPercent: -50 });
+
+  // Use GSAP quickTo for highly efficient, GPU-accelerated transform updates.
+  // This prevents continuous Layout thrashing (Reflows) caused by top/left assignment.
+  const cursorX = gsap.quickTo(cursor, "x", { duration: 0.5, ease: "power3.out" });
+  const cursorY = gsap.quickTo(cursor, "y", { duration: 0.5, ease: "power3.out" });
+  
+  const dotX = gsap.quickTo(cursorDot, "x", { duration: 0.1, ease: "power3.out" });
+  const dotY = gsap.quickTo(cursorDot, "y", { duration: 0.1, ease: "power3.out" });
 
   document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
+    cursorX(e.clientX);
+    cursorY(e.clientY);
+    dotX(e.clientX);
+    dotY(e.clientY);
   }, { passive: true });
-
-  function animateCursor() {
-    cursorX += (mouseX - cursorX) * 0.12;
-    cursorY += (mouseY - cursorY) * 0.12;
-    cursor.style.left = `${cursorX}px`;
-    cursor.style.top = `${cursorY}px`;
-
-    dotX += (mouseX - dotX) * 0.5;
-    dotY += (mouseY - dotY) * 0.5;
-    cursorDot.style.left = `${dotX}px`;
-    cursorDot.style.top = `${dotY}px`;
-
-    requestAnimationFrame(animateCursor);
-  }
-
-  animateCursor();
 
   // Event delegation for cursor states
   document.addEventListener('mouseover', (e) => {

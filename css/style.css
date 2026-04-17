@@ -171,7 +171,6 @@ body::before {
               border-color 0.3s ease,
               background 0.3s ease,
               border-radius 0.3s ease;
-  transform: translate(-50%, -50%);
   mix-blend-mode: difference;
   display: flex;
   align-items: center;
@@ -219,7 +218,6 @@ body::before {
   border-radius: 50%;
   pointer-events: none;
   z-index: 10001;
-  transform: translate(-50%, -50%);
 }
 
 @media (pointer: coarse) {
@@ -599,6 +597,7 @@ body::before {
   padding-left: 2vw;
   color: transparent;
   -webkit-text-stroke: 1.5px var(--color-text-primary);
+  transform: translateZ(0); /* Hardware acceleration flag to fix mix-blend-mode lag */
 }
 
 .hero-bottom {
