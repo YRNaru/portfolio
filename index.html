@@ -1,28 +1,60 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Designer Portfolio</title>
-  <meta name="description" content="Creative designer crafting bold visual experiences. Brand identity, UI/UX, editorial design, and motion graphics.">
+  <meta name="description"
+    content="Creative designer crafting bold visual experiences. Brand identity, UI/UX, editorial design, and motion graphics.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap"
+    rel="stylesheet">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="stylesheet" href="css/style.css">
 
   <noscript>
     <style>
-      body { cursor: auto !important; overflow: auto !important; }
-      .loader, .cursor, .cursor-dot, .scroll-progress { display: none !important; }
-      .hero-title .line-inner { transform: none !important; }
-      .hero-label, .hero-bottom, .hero-scroll { opacity: 1 !important; visibility: visible !important; }
-      .work-image-wrapper { clip-path: none !important; }
-      .section-divider-line { transform: scaleX(1) !important; }
-      .stat-suffix { opacity: 1 !important; }
+      body {
+        cursor: auto !important;
+        overflow: auto !important;
+      }
+
+      .loader,
+      .cursor,
+      .cursor-dot,
+      .scroll-progress {
+        display: none !important;
+      }
+
+      .hero-title .line-inner {
+        transform: none !important;
+      }
+
+      .hero-label,
+      .hero-bottom,
+      .hero-scroll {
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+
+      .work-image-wrapper {
+        clip-path: none !important;
+      }
+
+      .section-divider-line {
+        transform: scaleX(1) !important;
+      }
+
+      .stat-suffix {
+        opacity: 1 !important;
+      }
     </style>
   </noscript>
 </head>
+
 <body class="is-loading">
 
   <!-- ===== AMBIENT BUBBLES ===== -->
@@ -107,11 +139,7 @@
       <div class="hero-line"></div>
       <div class="container hero-content">
         <div class="hero-label" id="heroLabel">Creative Designer</div>
-        <h1 class="hero-title" id="heroTitle">
-          <span class="line"><span class="line-inner">Design</span></span>
-          <span class="line"><span class="line-inner">Without</span></span>
-          <span class="line"><span class="line-inner">Limits</span></span>
-        </h1>
+        <h1 class="hero-title" id="heroTitle"></h1>
         <div class="hero-bottom" id="heroBottom">
           <div class="hero-typewriter">
             <span class="typewriter-text" id="typewriterText"></span>
@@ -154,7 +182,9 @@
     </div>
 
     <!-- ===== DIVIDER ===== -->
-    <div class="section-divider"><div class="section-divider-line"></div></div>
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+    </div>
 
     <!-- ===== ABOUT ===== -->
     <section class="about section-padding" id="about">
@@ -206,7 +236,9 @@
     </section>
 
     <!-- ===== DIVIDER ===== -->
-    <div class="section-divider"><div class="section-divider-line"></div></div>
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+    </div>
 
     <!-- ===== WORKS ===== -->
     <section class="works section-padding" id="works">
@@ -220,8 +252,11 @@
           <div class="work-row">
             <article class="work-item gsap-reveal-left" data-cursor="view" data-tilt>
               <div class="work-image-wrapper">
-                <img src="assets/project-brand.png" alt="AURÉLIEN — ラグジュアリースキンケアブランドのブランドアイデンティティデザイン" loading="lazy" width="800" height="500">
-                <div class="work-overlay"><p class="work-category">Brand Identity</p></div>
+                <img src="assets/project-brand.png" alt="AURÉLIEN — ラグジュアリースキンケアブランドのブランドアイデンティティデザイン" loading="lazy"
+                  width="800" height="500">
+                <div class="work-overlay">
+                  <p class="work-category">Brand Identity</p>
+                </div>
               </div>
               <div class="work-meta">
                 <div>
@@ -231,7 +266,9 @@
                 <div style="display:flex;align-items:center;gap:var(--space-sm)">
                   <span class="work-year">2025</span>
                   <div class="work-arrow">
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                      <path d="M7 17L17 7M17 7H7M17 7V17" />
+                    </svg>
                   </div>
                 </div>
               </div>
@@ -240,7 +277,9 @@
             <article class="work-item gsap-reveal-right" data-delay="0.15" data-cursor="view" data-tilt>
               <div class="work-image-wrapper">
                 <img src="assets/project-3d.png" alt="VOID — 3Dアブストラクトビジュアルアート" loading="lazy" width="800" height="500">
-                <div class="work-overlay"><p class="work-category">3D / Motion</p></div>
+                <div class="work-overlay">
+                  <p class="work-category">3D / Motion</p>
+                </div>
               </div>
               <div class="work-meta">
                 <div>
@@ -250,7 +289,9 @@
                 <div style="display:flex;align-items:center;gap:var(--space-sm)">
                   <span class="work-year">2025</span>
                   <div class="work-arrow">
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                      <path d="M7 17L17 7M17 7H7M17 7V17" />
+                    </svg>
                   </div>
                 </div>
               </div>
@@ -260,8 +301,11 @@
           <div class="work-row">
             <article class="work-item gsap-reveal-right" data-cursor="view" data-tilt>
               <div class="work-image-wrapper">
-                <img src="assets/project-app.png" alt="SERENE — 瞑想ウェルネスアプリのUI/UXデザイン" loading="lazy" width="800" height="500">
-                <div class="work-overlay"><p class="work-category">UI / UX</p></div>
+                <img src="assets/project-app.png" alt="SERENE — 瞑想ウェルネスアプリのUI/UXデザイン" loading="lazy" width="800"
+                  height="500">
+                <div class="work-overlay">
+                  <p class="work-category">UI / UX</p>
+                </div>
               </div>
               <div class="work-meta">
                 <div>
@@ -271,7 +315,9 @@
                 <div style="display:flex;align-items:center;gap:var(--space-sm)">
                   <span class="work-year">2024</span>
                   <div class="work-arrow">
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                      <path d="M7 17L17 7M17 7H7M17 7V17" />
+                    </svg>
                   </div>
                 </div>
               </div>
@@ -279,8 +325,11 @@
 
             <article class="work-item gsap-reveal-left" data-delay="0.15" data-cursor="view" data-tilt>
               <div class="work-image-wrapper">
-                <img src="assets/project-editorial.png" alt="RAW//REBEL — ファッション誌のエディトリアルデザイン" loading="lazy" width="800" height="500">
-                <div class="work-overlay"><p class="work-category">Editorial</p></div>
+                <img src="assets/project-editorial.png" alt="RAW//REBEL — ファッション誌のエディトリアルデザイン" loading="lazy"
+                  width="800" height="500">
+                <div class="work-overlay">
+                  <p class="work-category">Editorial</p>
+                </div>
               </div>
               <div class="work-meta">
                 <div>
@@ -290,7 +339,9 @@
                 <div style="display:flex;align-items:center;gap:var(--space-sm)">
                   <span class="work-year">2024</span>
                   <div class="work-arrow">
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                      <path d="M7 17L17 7M17 7H7M17 7V17" />
+                    </svg>
                   </div>
                 </div>
               </div>
@@ -306,7 +357,9 @@
     </section>
 
     <!-- ===== DIVIDER ===== -->
-    <div class="section-divider"><div class="section-divider-line"></div></div>
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+    </div>
 
     <!-- ===== SHOWCASE ===== -->
     <section class="showcase section-padding" id="showcase">
@@ -318,46 +371,52 @@
       </div>
       <div class="showcase-wrapper">
         <button class="showcase-nav-btn prev" aria-label="Previous Slide">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><path d="M15 19l-7-7 7-7"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor">
+            <path d="M15 19l-7-7 7-7" />
+          </svg>
         </button>
         <button class="showcase-nav-btn next" aria-label="Next Slide">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><path d="M9 5l7 7-7 7"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor">
+            <path d="M9 5l7 7-7 7" />
+          </svg>
         </button>
         <div class="showcase-horizontal">
-        <div class="showcase-card" data-cursor="view">
-          <img src="assets/project-brand.png" alt="ブランドデザイン制作プロセス" loading="lazy" width="500" height="625">
-          <div class="showcase-card-info">
-            <div class="showcase-card-title">Brand System</div>
-            <div class="showcase-card-desc">アイデンティティの構築</div>
+          <div class="showcase-card" data-cursor="view">
+            <img src="assets/project-brand.png" alt="ブランドデザイン制作プロセス" loading="lazy" width="500" height="625">
+            <div class="showcase-card-info">
+              <div class="showcase-card-title">Brand System</div>
+              <div class="showcase-card-desc">アイデンティティの構築</div>
+            </div>
           </div>
-        </div>
-        <div class="showcase-card" data-cursor="view">
-          <img src="assets/project-app.png" alt="アプリUIデザイン" loading="lazy" width="500" height="625">
-          <div class="showcase-card-info">
-            <div class="showcase-card-title">Digital Experience</div>
-            <div class="showcase-card-desc">インタラクティブなUX</div>
+          <div class="showcase-card" data-cursor="view">
+            <img src="assets/project-app.png" alt="アプリUIデザイン" loading="lazy" width="500" height="625">
+            <div class="showcase-card-info">
+              <div class="showcase-card-title">Digital Experience</div>
+              <div class="showcase-card-desc">インタラクティブなUX</div>
+            </div>
           </div>
-        </div>
-        <div class="showcase-card" data-cursor="view">
-          <img src="assets/project-editorial.png" alt="エディトリアルレイアウト" loading="lazy" width="500" height="625">
-          <div class="showcase-card-info">
-            <div class="showcase-card-title">Print & Editorial</div>
-            <div class="showcase-card-desc">紙面のアートディレクション</div>
+          <div class="showcase-card" data-cursor="view">
+            <img src="assets/project-editorial.png" alt="エディトリアルレイアウト" loading="lazy" width="500" height="625">
+            <div class="showcase-card-info">
+              <div class="showcase-card-title">Print & Editorial</div>
+              <div class="showcase-card-desc">紙面のアートディレクション</div>
+            </div>
           </div>
-        </div>
-        <div class="showcase-card" data-cursor="view">
-          <img src="assets/project-3d.png" alt="3Dビジュアルアート" loading="lazy" width="500" height="625">
-          <div class="showcase-card-info">
-            <div class="showcase-card-title">3D & Motion</div>
-            <div class="showcase-card-desc">デジタル造形</div>
+          <div class="showcase-card" data-cursor="view">
+            <img src="assets/project-3d.png" alt="3Dビジュアルアート" loading="lazy" width="500" height="625">
+            <div class="showcase-card-info">
+              <div class="showcase-card-title">3D & Motion</div>
+              <div class="showcase-card-desc">デジタル造形</div>
+            </div>
           </div>
-        </div>
         </div>
       </div>
     </section>
 
     <!-- ===== DIVIDER ===== -->
-    <div class="section-divider"><div class="section-divider-line"></div></div>
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+    </div>
 
     <!-- ===== CTA ===== -->
     <section class="cta section-padding" id="contact">
@@ -371,7 +430,9 @@
         </p>
         <a href="mailto:hello@yamamoto.design" class="cta-button gsap-reveal" data-delay="0.3" data-cursor="pointer">
           <span>Get in Touch</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+            <path d="M7 17L17 7M17 7H7M17 7V17" />
+          </svg>
         </a>
         <a href="mailto:hello@yamamoto.design" class="cta-email gsap-reveal" data-delay="0.4" data-cursor="pointer">
           hello@yamamoto.design
@@ -396,30 +457,42 @@
         </nav>
         <div class="footer-social">
           <a href="https://www.instagram.com/naru_020301/" aria-label="Instagram" data-cursor="pointer">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+            </svg>
           </a>
           <a href="https://twitter.com/naru_020301" aria-label="X (Twitter)" data-cursor="pointer">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
           </a>
           <a href="https://github.com/YRNaru/portfolio" aria-label="github" data-cursor="pointer">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 24C5.385 24 0 18.615 0 12S5.385 0 12 0s12 5.385 12 12-5.385 12-12 12zm10.12-10.358c-.35-.11-3.17-.953-6.384-.438 1.34 3.684 1.887 6.684 1.992 7.308 2.3-1.555 3.936-4.02 4.395-6.87zm-6.115 7.808c-.153-.9-.75-4.032-2.19-7.77l-.066.02c-5.79 2.015-7.86 6.025-8.04 6.4 1.73 1.358 3.92 2.166 6.29 2.166 1.42 0 2.77-.29 4-.81zm-11.62-2.58c.232-.4 3.045-5.055 8.332-6.765.135-.045.27-.084.405-.12-.26-.585-.54-1.167-.832-1.74C7.17 11.775 2.206 11.71 1.756 11.7l-.004.312c0 2.633.998 5.037 2.634 6.855zm-2.42-8.955c.46.008 4.683.026 9.477-1.248-1.698-3.018-3.53-5.558-3.8-5.928-2.868 1.35-5.01 3.99-5.676 7.17zM9.6 2.052c.282.38 2.145 2.914 3.822 6 3.645-1.365 5.19-3.44 5.373-3.702C16.86 2.643 14.527 1.75 12 1.75c-.82 0-1.62.105-2.39.302zm10.04 3.15c-.218.29-1.91 2.47-5.694 4.02.247.5.486 1.01.707 1.53.078.18.154.36.228.54 3.41-.43 6.8.26 7.14.33-.02-2.42-.88-4.64-2.38-6.42z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 24C5.385 24 0 18.615 0 12S5.385 0 12 0s12 5.385 12 12-5.385 12-12 12zm10.12-10.358c-.35-.11-3.17-.953-6.384-.438 1.34 3.684 1.887 6.684 1.992 7.308 2.3-1.555 3.936-4.02 4.395-6.87zm-6.115 7.808c-.153-.9-.75-4.032-2.19-7.77l-.066.02c-5.79 2.015-7.86 6.025-8.04 6.4 1.73 1.358 3.92 2.166 6.29 2.166 1.42 0 2.77-.29 4-.81zm-11.62-2.58c.232-.4 3.045-5.055 8.332-6.765.135-.045.27-.084.405-.12-.26-.585-.54-1.167-.832-1.74C7.17 11.775 2.206 11.71 1.756 11.7l-.004.312c0 2.633.998 5.037 2.634 6.855zm-2.42-8.955c.46.008 4.683.026 9.477-1.248-1.698-3.018-3.53-5.558-3.8-5.928-2.868 1.35-5.01 3.99-5.676 7.17zM9.6 2.052c.282.38 2.145 2.914 3.822 6 3.645-1.365 5.19-3.44 5.373-3.702C16.86 2.643 14.527 1.75 12 1.75c-.82 0-1.62.105-2.39.302zm10.04 3.15c-.218.29-1.91 2.47-5.694 4.02.247.5.486 1.01.707 1.53.078.18.154.36.228.54 3.41-.43 6.8.26 7.14.33-.02-2.42-.88-4.64-2.38-6.42z" />
+            </svg>
           </a>
         </div>
       </div>
       <div class="footer-bottom">
         <span class="footer-copyright">© 2026 YAMAMOTO. All rights reserved.</span>
-        <a href="#hero" class="footer-back-top" data-cursor="pointer">
-          Back to Top
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-        </a>
       </div>
     </div>
   </footer>
 
   <!-- ===== FLOATING BACK TO TOP ===== -->
   <a href="#hero" class="floating-back-top" id="floatingBackTop" aria-label="ページトップへ戻る" data-cursor="pointer">
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+      <path d="M12 19V5M5 12l7-7 7 7" />
+    </svg>
   </a>
+
+  <!-- ===== PAGE TRANSITION CURTAIN ===== -->
+  <div class="transition-curtain" id="transitionCurtain">
+    <div class="transition-brand">YMT.</div>
+  </div>
 
   <!-- ===== GSAP CDN ===== -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -427,4 +500,5 @@
   <script src="js/main.js"></script>
 
 </body>
+
 </html>

@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
   gsap.registerPlugin(ScrollTrigger);
 
   // Set initial hidden states for GSAP-animated elements
-  gsap.set('.hero-title .line-inner', { y: '110%' });
   gsap.set('#heroLabel, #heroBottom, #heroScroll, .hero-line', { autoAlpha: 0, y: 30 });
 
   initLoader();
@@ -101,15 +100,12 @@ function playHeroAnimation() {
 
   heroTl
     .to('#heroLabel', { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 0.1)
-    .to('.hero-title .line-inner', {
-      y: '0%',
-      duration: 1.2,
-      ease: 'power4.out',
-      stagger: 0.1
-    }, 0.2)
     .to('#heroBottom', { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 0.9)
     .to('#heroScroll', { autoAlpha: 1, y: 0, duration: 0.6 }, 1.0)
     .to('.hero-line', { autoAlpha: 1, y: 0, duration: 0.6 }, 0.8);
+
+  // Start hero title animation
+  startHeroAnimation('Design Without Limits');
 
   // Start typewriter after hero text appears
   setTimeout(initTypewriter, 1200);
@@ -258,7 +254,7 @@ function initCursor() {
   // This prevents continuous Layout thrashing (Reflows) caused by top/left assignment.
   const cursorX = gsap.quickTo(cursor, "x", { duration: 0.5, ease: "power3.out" });
   const cursorY = gsap.quickTo(cursor, "y", { duration: 0.5, ease: "power3.out" });
-  
+
   const dotX = gsap.quickTo(cursorDot, "x", { duration: 0.1, ease: "power3.out" });
   const dotY = gsap.quickTo(cursorDot, "y", { duration: 0.1, ease: "power3.out" });
 
@@ -324,15 +320,72 @@ function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener('click', (e) => {
       const href = anchor.getAttribute('href');
-      if (href === '#') return;
+      if (href === '#') {
+        e.preventDefault();
+        return;
+      }
 
-      e.preventDefault();
       const target = document.querySelector(href);
       if (!target) return;
 
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      e.preventDefault();
+
+      const isNav = anchor.closest('.nav-links, .fn-content, .footer-nav');
+
+      // ハンバーガーメニューが出ているスマホサイズ(768px以下)では幕を出さない
+      if (isNav && window.innerWidth > 768) {
+        doNavTransition(target, () => {
+          if (window.closeMobileNavInstantly) {
+            window.closeMobileNavInstantly();
+          }
+        });
+      } else {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // モバイルナビゲーションのリンクだった場合はスムーズに閉じる
+        if (anchor.closest('.fn-content') && window.closeMobileNavGracefully) {
+          window.closeMobileNavGracefully();
+        }
+      }
     });
   });
+}
+
+let isNavTransitioning = false;
+function doNavTransition(targetElement, onCoverCallback) {
+  if (isNavTransitioning) return;
+
+  const curtain = document.getElementById('transitionCurtain');
+  if (!curtain) {
+    if (onCoverCallback) onCoverCallback();
+    targetElement.scrollIntoView({ behavior: 'auto', block: 'start' });
+    return;
+  }
+
+  isNavTransitioning = true;
+  curtain.classList.add('is-active');
+
+  const tl = gsap.timeline({
+    onComplete: () => {
+      isNavTransitioning = false;
+      curtain.classList.remove('is-active');
+    }
+  });
+
+  tl.to(curtain, {
+    y: '0%',
+    duration: 0.7,
+    ease: 'power3.inOut',
+    onComplete: () => {
+      if (onCoverCallback) onCoverCallback();
+      targetElement.scrollIntoView({ behavior: 'auto', block: 'start' });
+    }
+  })
+    .to(curtain, {
+      y: '-100%',
+      duration: 0.7,
+      ease: 'power3.inOut',
+      delay: 0.5
+    });
 }
 
 /* ========================================
@@ -380,17 +433,27 @@ function initMobileNav() {
     }
   });
 
-  // Close on link click
-  overlay.querySelectorAll('.fn-link').forEach((link) => {
-    link.addEventListener('click', () => {
-      isOpen = false;
-      toggle.classList.remove('is-active');
-      toggle.setAttribute('aria-expanded', 'false');
-      overlay.setAttribute('aria-hidden', 'true');
-      navTl.timeScale(1.3).reverse();
-      setTimeout(() => overlay.classList.remove('is-open'), 600);
-    });
-  });
+  // Create a function to instantly reset mobile nav (called under the curtain)
+  window.closeMobileNavInstantly = () => {
+    if (!isOpen) return;
+    isOpen = false;
+    toggle.classList.remove('is-active');
+    toggle.setAttribute('aria-expanded', 'false');
+    overlay.setAttribute('aria-hidden', 'true');
+    navTl.progress(0).pause();
+    overlay.classList.remove('is-open');
+  };
+
+  // Create a function to gracefully close mobile nav (used on mobile without curtain)
+  window.closeMobileNavGracefully = () => {
+    if (!isOpen) return;
+    isOpen = false;
+    toggle.classList.remove('is-active');
+    toggle.setAttribute('aria-expanded', 'false');
+    overlay.setAttribute('aria-hidden', 'true');
+    navTl.timeScale(1.3).reverse();
+    setTimeout(() => overlay.classList.remove('is-open'), 600);
+  };
 }
 
 /* ========================================
@@ -603,7 +666,7 @@ function initShowcaseSlider() {
   if (!showcase) return;
 
   const originalCards = Array.from(showcase.querySelectorAll('.showcase-card'));
-  
+
   // 1. Append Clones (for infinite scrolling right)
   originalCards.forEach(card => {
     showcase.appendChild(card.cloneNode(true));
@@ -636,18 +699,18 @@ function initShowcaseSlider() {
         // Infinite Loop Bounds Check before taking a step
         if (showcase.scrollLeft >= originalTotalWidth * 1.5) {
           showcase.scrollTo({ left: showcase.scrollLeft - originalTotalWidth, behavior: 'auto' });
-          
+
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
               showcase.scrollBy({ left: scrollStep, behavior: 'smooth' });
             });
           });
           return;
-        } 
-        
+        }
+
         if (showcase.scrollLeft < originalTotalWidth * 0.5) {
           showcase.scrollTo({ left: showcase.scrollLeft + originalTotalWidth, behavior: 'auto' });
-          
+
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
               showcase.scrollBy({ left: scrollStep, behavior: 'smooth' });
@@ -765,3 +828,104 @@ function initBubbles() {
   // Continuously spawn new bubbles
   setInterval(createBubble, 2000);
 }
+
+/* ========================================
+   HERO TITLE ANIMATION
+   ======================================== */
+const HERO_CONFIG = {
+  entryDuration: 750,   // ms: 1文字の入場アニメーション時間
+  entryStagger: 75,    // ms: 文字ごとの入場ディレイ
+  holdDuration: 1600,  // ms: 中央で止まっている時間
+  exitDuration: 480,   // ms: 1文字の退場アニメーション時間
+  exitStagger: 45,    // ms: 文字ごとの退場ディレイ
+  loopPause: 700,   // ms: ループ前の休憩時間
+  entryEasing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+  exitEasing: 'cubic-bezier(0.7, 0, 0.84, 0)',
+};
+
+let allHeroChars = [];
+let heroLoopTimer = null;
+let isHeroRunning = false;
+
+function buildHeroChars(text) {
+  const titleEl = document.getElementById('heroTitle');
+  if (!titleEl) return;
+  titleEl.innerHTML = '';
+  allHeroChars = [];
+
+  const words = text.trim().split(' ');
+  words.forEach((word, wi) => {
+    if (wi > 0) {
+      const sp = document.createElement('span');
+      sp.style.cssText = 'display:inline-block;width:0.28em;';
+      titleEl.appendChild(sp);
+    }
+    const group = document.createElement('span');
+    group.className = 'word-group';
+    const isReverse = (wi === 1); // Apply to 'Without'
+
+    const charArray = [...word];
+    const wordLen = charArray.length;
+    const charStaggerBase = allHeroChars.length;
+
+    charArray.forEach((letter, li) => {
+      const span = document.createElement('span');
+      span.className = 'char';
+      if (isReverse) span.classList.add('is-reverse');
+      span.textContent = letter;
+
+      // "Without" (isReverse) は頭の文字から、それ以外は最後の文字から
+      const staggerIndex = charStaggerBase + (isReverse ? li : (wordLen - 1 - li));
+      span.dataset.stagger = staggerIndex;
+
+      group.appendChild(span);
+      allHeroChars.push(span);
+    });
+    titleEl.appendChild(group);
+  });
+}
+
+function resetHeroChars() {
+  allHeroChars.forEach(c => {
+    c.style.animation = 'none';
+    c.style.opacity = '0';
+  });
+}
+
+function runHeroCycle() {
+  if (!isHeroRunning) return;
+  resetHeroChars();
+
+  allHeroChars.forEach((c) => {
+    const staggerIndex = parseInt(c.dataset.stagger, 10);
+    setTimeout(() => {
+      if (!isHeroRunning) return;
+      const animName = c.classList.contains('is-reverse') ? 'charEnterReverse' : 'charEnter';
+      c.style.animation = `${animName} ${HERO_CONFIG.entryDuration}ms ${HERO_CONFIG.entryEasing} forwards`;
+    }, staggerIndex * HERO_CONFIG.entryStagger);
+  });
+
+  const entryEnd = (allHeroChars.length - 1) * HERO_CONFIG.entryStagger + HERO_CONFIG.entryDuration;
+  const holdStart = entryEnd;
+  const exitStart = holdStart + HERO_CONFIG.holdDuration;
+
+  allHeroChars.forEach((c) => {
+    const staggerIndex = parseInt(c.dataset.stagger, 10);
+    setTimeout(() => {
+      if (!isHeroRunning) return;
+      const animName = c.classList.contains('is-reverse') ? 'charExitReverse' : 'charExit';
+      c.style.animation = `${animName} ${HERO_CONFIG.exitDuration}ms ${HERO_CONFIG.exitEasing} forwards`;
+    }, exitStart + staggerIndex * HERO_CONFIG.exitStagger);
+  });
+
+  const cycleEnd = exitStart + (allHeroChars.length - 1) * HERO_CONFIG.exitStagger + HERO_CONFIG.exitDuration + HERO_CONFIG.loopPause;
+  heroLoopTimer = setTimeout(runHeroCycle, cycleEnd);
+}
+
+function startHeroAnimation(text) {
+  clearTimeout(heroLoopTimer);
+  isHeroRunning = true;
+  buildHeroChars(text);
+  runHeroCycle();
+}
+
